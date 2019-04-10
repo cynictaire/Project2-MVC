@@ -3,8 +3,8 @@ const handleDomo = (e) => {
     
     $("#domoMessage").animate({width:'hide'}, 350);
     
-    if ($("#pTitle").val() === '' || $("#pContent").val() === '' || $("#pTag").val() === '') {
-        handleError("Title and post content are required");
+    if ($("#pContent").val() === '') {
+        handleError("Post content is required");
         return false;
     }
     
@@ -29,7 +29,7 @@ const DomoForm = (props) => {
             <label htmlFor="post">Post: </label>
             <input id="pContent" type="text" name="post" placeholder="write something..."/>
             <label htmlFor="pTag">Tag(s): </label>
-            <input id="pTag" type="text" name="tag" placeholder="tag something"/>
+            <input id="pTag" type="text" name="tag" placeholder="tag, something, here"/>
             <input type="hidden" id="csrfVal" name="_csrf" value={props.csrf} />
             <input className="makeDomoSubmit" type="submit" value="Post" />
         </form>
@@ -41,11 +41,11 @@ const handleDelete = (e, domo) => {
 
     //console.log($(`#${domo.name}deleteForm`).serialize());
     
-    let domoSerialize = $(`#${domo.name}deleteForm`).serialize() + document.querySelector("#csrfVal").value;
+    let domoSerialize = $(`#${domo.title}deleteForm`).serialize() + document.querySelector("#csrfVal").value;
     
     //console.log(domoSerialize);
     
-    sendAjax('POST', $(`#${domo.name}deleteForm`).attr("action"), domoSerialize, function() {
+    sendAjax('POST', $(`#${domo.title}deleteForm`).attr("action"), domoSerialize, function() {
         loadDomosFromServer();
     });
     
@@ -69,7 +69,7 @@ const DomoList = function(props) {
                 <p className="domoAge"> {domo.post} </p>
                 <p className="domoHeight"> Tag(s): {domo.tag} </p>
                 
-                <form id={`${domo.name}deleteForm`} 
+                <form id={`${domo.title}deleteForm`} 
                       onSubmit={(e) => handleDelete(e, domo)}
                       name="deleteForm"
                       action="/delete"

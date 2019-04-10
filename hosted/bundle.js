@@ -5,8 +5,8 @@ var handleDomo = function handleDomo(e) {
 
     $("#domoMessage").animate({ width: 'hide' }, 350);
 
-    if ($("#pTitle").val() === '' || $("#pContent").val() === '' || $("#pTag").val() === '') {
-        handleError("Title and post content are required");
+    if ($("#pContent").val() === '') {
+        handleError("Post content is required");
         return false;
     }
 
@@ -44,7 +44,7 @@ var DomoForm = function DomoForm(props) {
             { htmlFor: "pTag" },
             "Tag(s): "
         ),
-        React.createElement("input", { id: "pTag", type: "text", name: "tag", placeholder: "tag something" }),
+        React.createElement("input", { id: "pTag", type: "text", name: "tag", placeholder: "tag, something, here" }),
         React.createElement("input", { type: "hidden", id: "csrfVal", name: "_csrf", value: props.csrf }),
         React.createElement("input", { className: "makeDomoSubmit", type: "submit", value: "Post" })
     );
@@ -55,11 +55,11 @@ var handleDelete = function handleDelete(e, domo) {
 
     //console.log($(`#${domo.name}deleteForm`).serialize());
 
-    var domoSerialize = $("#" + domo.name + "deleteForm").serialize() + document.querySelector("#csrfVal").value;
+    var domoSerialize = $("#" + domo.title + "deleteForm").serialize() + document.querySelector("#csrfVal").value;
 
     //console.log(domoSerialize);
 
-    sendAjax('POST', $("#" + domo.name + "deleteForm").attr("action"), domoSerialize, function () {
+    sendAjax('POST', $("#" + domo.title + "deleteForm").attr("action"), domoSerialize, function () {
         loadDomosFromServer();
     });
 
@@ -107,7 +107,7 @@ var DomoList = function DomoList(props) {
             ),
             React.createElement(
                 "form",
-                { id: domo.name + "deleteForm",
+                { id: domo.title + "deleteForm",
                     onSubmit: function onSubmit(e) {
                         return handleDelete(e, domo);
                     },

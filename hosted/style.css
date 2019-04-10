@@ -199,6 +199,7 @@ nav:nth-child(1) {
     min-width: 400px;
     border: 2px solid #262626;
     border-radius: 4px;
+    background-color: #fff;
     margin: 0 auto;
     margin-top: 100px;
 }
@@ -239,6 +240,7 @@ h3.emptyDomo {
     margin: 0 auto;
     text-align: center;
     margin-top: 18px;
+    padding: 15px;
 }
 
 h3.domoName {
