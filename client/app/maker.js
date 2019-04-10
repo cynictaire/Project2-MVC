@@ -38,8 +38,11 @@ const DomoForm = (props) => {
 
 // Delete Domos
 const handleDelete = (e, domo) => {
+    
+    //NEVER FORGET
+    e.preventDefault();
 
-    //console.log($(`#${domo.name}deleteForm`).serialize());
+    console.log($(`#${domo.title}deleteForm`).serialize() + document.querySelector("#csrfVal").value);
     
     let domoSerialize = $(`#${domo.title}deleteForm`).serialize() + document.querySelector("#csrfVal").value;
     
@@ -62,12 +65,14 @@ const DomoList = function(props) {
     }
     
     const domoNodes = props.domos.map(function(domo) {
+        
+        let tagStr = domo.tag.split(",");
         return (
             <div key={domo._id} className="domo">
                 <img src="/assets/img/domoface.jpeg" alt="domo face" className="domoFace" />
                 <h3 className="domoName"> {domo.title} </h3>
                 <p className="domoAge"> {domo.post} </p>
-                <p className="domoHeight"> Tag(s): {domo.tag} </p>
+                <p className="domoHeight"> Tag(s): {tagStr}</p>
                 
                 <form id={`${domo.title}deleteForm`} 
                       onSubmit={(e) => handleDelete(e, domo)}
@@ -104,7 +109,7 @@ const setup = function(csrf) {
     );
     
     ReactDOM.render(
-        <DomoForm domos={[]} />, document.querySelector("#domos")
+        <DomoForm domos={[]} csrf={csrf} />, document.querySelector("#domos")
     );
     
     loadDomosFromServer();

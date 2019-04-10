@@ -47,6 +47,8 @@ const deleteDomos = (request, response) => {
   const req = request;
   const res = response;
 
+console.log("delete");
+    
   if (!req.body.domoID) {
     return res.status(400).json({ error: 'An error occurred' });
   }

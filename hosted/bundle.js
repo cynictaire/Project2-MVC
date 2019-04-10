@@ -53,7 +53,10 @@ var DomoForm = function DomoForm(props) {
 // Delete Domos
 var handleDelete = function handleDelete(e, domo) {
 
-    //console.log($(`#${domo.name}deleteForm`).serialize());
+    //NEVER FORGET
+    e.preventDefault();
+
+    console.log($("#" + domo.title + "deleteForm").serialize() + document.querySelector("#csrfVal").value);
 
     var domoSerialize = $("#" + domo.title + "deleteForm").serialize() + document.querySelector("#csrfVal").value;
 
@@ -80,6 +83,8 @@ var DomoList = function DomoList(props) {
     }
 
     var domoNodes = props.domos.map(function (domo) {
+
+        var tagStr = domo.tag.split(",");
         return React.createElement(
             "div",
             { key: domo._id, className: "domo" },
@@ -102,8 +107,7 @@ var DomoList = function DomoList(props) {
                 "p",
                 { className: "domoHeight" },
                 " Tag(s): ",
-                domo.tag,
-                " "
+                tagStr
             ),
             React.createElement(
                 "form",
@@ -138,7 +142,7 @@ var loadDomosFromServer = function loadDomosFromServer() {
 var setup = function setup(csrf) {
     ReactDOM.render(React.createElement(DomoForm, { csrf: csrf }), document.querySelector("#makeDomo"));
 
-    ReactDOM.render(React.createElement(DomoForm, { domos: [] }), document.querySelector("#domos"));
+    ReactDOM.render(React.createElement(DomoForm, { domos: [], csrf: csrf }), document.querySelector("#domos"));
 
     loadDomosFromServer();
 };

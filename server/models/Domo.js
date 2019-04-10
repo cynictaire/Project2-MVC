@@ -64,6 +64,8 @@ DomoSchema.statics.deleteDomos = (domoID, callback) => {
   DomoModel.deleteOne(search, (err) => {
     if (err) throw err;
   }).exec(callback);
+    
+    console.log("successfully deleted");
 };
 
 DomoModel = mongoose.model('Domo', DomoSchema);
