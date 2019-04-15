@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Audiowide|Noto+Sans+JP');
+
+/*** BODY ***/
 html, body {
     height: 100%;
     width: 100%;
@@ -5,28 +8,33 @@ html, body {
     padding: 0;
     overflow-x: hidden;
     background-color: #35465c;
+    font-family: 'Noto Sans JP', sans-serif;
 }
 
-#logo {
-    height: 40px;
-    width: 40;
-    padding-top: 5px;
-    float:left;
-    border-radius: 8px;
+#siteTitle {
+    font-size: 100px;
+    color: #fff;
+    text-align: center;
+    margin-left: 30px;
+    margin-top: 200px;
+    font-family: 'Audiowide', cursive;
 }
 
+.formTitle {
+    text-align: center;
+    border-bottom: 0.5px solid #F2F2F2;
+    font-size: 1.3em;
+}
+
+/*** NAVIGATION ***/
 nav {
     width: 100%;
-    height: 50px;
+    height: 10px;
     background-color: #35465c;
 }
 
-nav:nth-child(1) {
-    padding-left: 25px;
-}
-
 .navlink {
-    padding: 105px;
+    padding: 20px;
     padding-top: 35px;
     padding-left: 20px;
     color: white;
@@ -35,9 +43,9 @@ nav:nth-child(1) {
 }
 
 .navlink a, .navlink a:link, .navlink a:visited, .navlink a:hover, .navlink a:active {
-    color: white;
+    color: #fff;
     text-decoration: none;
-    padding: 5px;
+    padding: 10px;
     border-radius: 4px;
     background-color: #262626;
     transition: background-color 0.4s ease;
@@ -45,73 +53,74 @@ nav:nth-child(1) {
 
 .navlink a:hover {
     transition: background-color 0.8s ease;
-    background-color: #66bdff;
-}
-
-.domoForm {
-    border: 2px solid #262626;
-    height: 35px;
-    width: 900px;
-    margin-top:0px;
-    padding-top:10px;
-    background-color: #262626;
-    border-bottom-right-radius: 4px;
-    border-top-right-radius: 4px;
     background-color: #fff;
+    color: #2f2f2f;
+}
+
+/*** POST FORM ***/
+#postForm {
     margin: 0 auto;
+    background-color: #fff;
+    width: 545px;
+    height: 270px;
+    margin-top: 100px;
+    border-bottom: solid #262626;
+    position: relative;
 }
 
-.domoForm label {
-    display: inline-block;
-    width: 75px;
-    margin-left: 10px;
-    font-size: 1.2em;
-    float: left;
-    color: #000;
+
+#pTitle {
+    height: 50px;
+    width: 500px;
+    margin-top: 30px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    margin-left: 25px;
+    font-size: 35px;
+    font-weight: bold;
+    font-family: 'Noto Sans JP', sans-serif;
 }
 
-.domoForm input[type=text] {
-    float:left;
-    margin: 5px;
+#pContent {
+    height: 60px;
+    width: 500px;
+    padding-top: 15px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    margin-left: 25px;
+    font-family: 'Noto Sans JP', sans-serif;
 }
 
-.makeDomoSubmit {
-    transition: background-color 0.4s ease;
-    display: inline;
-    width: 90px;
-    background-color: #262626;
-    border-radius: 2px;
-    color: white;
-    text-decoration: none;
-    margin: 2px;
+#pTag {
+    height: 35px;
+    width: 500px;
+    padding-left: 10px;
+    margin-bottom: 20px;
+    margin-left: 25px;
+    font-family: 'Noto Sans JP', sans-serif;
 }
 
-.makeDomoSubmit:link, .makeDomoSubmit:visited, .makeDomoSubmit:hover, .makeDomoSubmit:active {
-    color: white;
+#postSubmit {
+    color: #79DAFF;
+    margin-left: 84%;
+    background-color: #00B8FF;
+    font-size: 25px;
+    font-family: 'Noto Sans JP', sans-serif;
 }
 
-.makeDomoSubmit:hover {
-    transition: background-color 0.4s ease;
-    background-color: #338acc;
+#deleteButton {
+    color: #fff;
+    margin-left: 85%;
+    background-color: #9DA6AF;
+    font-size: 15px;
 }
 
+/*** LOGIN / SIGN UP / PW CHANGE ***/
 .mainForm {
     height: 300px;
-    width: 350px;
+    width: 250px;
     margin: 0 auto;
-    padding-top: 350px;
-    font-size: 1.2em;
-}
-
-.mainForm h3 {
-    text-align: center;
-}
-
-.mainForm label {
-    display: inline-block;
-    width: 100px;
-    margin-right: 10px;
-    text-align: right;
+    padding-top: 10px;
     font-size: 1.2em;
 }
 
@@ -123,36 +132,50 @@ nav:nth-child(1) {
     margin-top: 14px;
     font-size: 1.2em;
     width: 100px;
-    background-color: #262626;
+    background-color: #00B8FF;
     border-radius: 2px;
-    border-color: #262626;
+    border-color: #00B8FF;
     padding: 3px 0px;
     color: white;
     text-decoration: none;
+    font-family: 'Noto Sans JP', sans-serif;
 }
 
-.formSubmit:link, .formSubmit:visited, .formSubmit:hover, .formSubmit:active {
-    color: white;
+.changePWForm {
+    height: 250px;
+    width: 250px;
+    margin: 0 auto;
+    padding-top: 20px;
+    background-color: #fff;
+    border-bottom: solid #262626;
+    position: relative;
 }
 
-.formSubmit:hover {
-    transition: background-color 0.4s ease;
-    background-color: #338acc;
+#pwSubmit {
+    color: #fff;
+    margin-left: 23%;
+    background-color: #9DA6AF;
+    margin-top: 15px;
+    font-size: 15px;
+    font-family: 'Noto Sans JP', sans-serif;
 }
 
-#user, #pass, #pass2 {
+#user, #pass, #pass2, #oldPass {
     text-align: center;
     font-size: 1.1em;
     width: 180px;
     border-radius: 6px;
+    margin-left: 35px;
+    margin-bottom: 10px;
 }
 
-#user:focus, #pass:focus, #pass2:focus {
+#user:focus, #pass:focus, #pass2:focus, #oldPass:focus {
     outline: none;
     box-shadow: 0px 0px 1px 1px #55acee;
 }
 
-#domoMessage {
+/*** ERROR MESSAGE ***/
+#postMessage {
     display:none;
     top: 250px;
     width: 250px;
@@ -163,7 +186,7 @@ nav:nth-child(1) {
     overflow: hidden;
 }
 
-#domoMessage h3 {
+#postMessage h3 {
     width: 200px;
     position: absolute;
     top: 0px;
@@ -179,11 +202,11 @@ nav:nth-child(1) {
 #errorMessage {
     font-size: 1.2em;
     font-weight: bold;
-    color: red;
-    font-style: italic;
+    color: #262626;
 }
 
-#domo {
+/*** USER MADE POSTS ***/
+#post {
     z-index: 225;
     margin-top: -20px;
     margin-left: 135px;
@@ -194,76 +217,116 @@ nav:nth-child(1) {
     transform: rotate(330deg);
 }
 
-#domos {
-    width: 40%;
-    min-width: 400px;
-    border: 2px solid #262626;
-    border-radius: 4px;
-    background-color: #fff;
+#posts {
+    width: 55%;
+    min-width: 300px;
     margin: 0 auto;
-    margin-top: 100px;
+    margin-top: 40px;
 }
 
-.domo {
-    width: 95%;
+.post {
+    width: 600px;
     margin: 0 auto;
     margin-top: 2px;
-    margin-bottom: 2px;
-    border: 2px solid #262626;
-    border-radius: 4px;
+    margin-bottom: 12px;
+    border-bottom: 0.5px solid #262626;
     background-color: #fff;
     padding: 10px;
-    min-height:60px;
+    min-height: 60px;
     overflow: hidden;
+    border-radius: 10px;
 }
 
-.domo:hover {
-    transition: border-color 0.2s ease-out;
-    border-color: rgba(255,255,255, 0.8);
-    transition: background-color 2.6s ease-out;
-    background-color: #66bfff;
-}
-
-img.domoFace {
-    margin-left: 25px;
-    margin-right: 10px;
-    height: 50px;
-    width: 50px;
+img.postFace {
+    margin-right: 200px;
+    height: 38px;
+    width: 35px;
     border-radius: 4px;
-    margin-top:10px;
-    float:left;
+    margin-top: 15px;
 }
 
-h3.emptyDomo {
+h3.postTitle {
     width: 400px;
-    font-size: 1.5em;
-    margin: 0 auto;
-    text-align: center;
-    margin-top: 18px;
-    padding: 15px;
-}
-
-h3.domoName {
-    float:left;
-    width: 200px;
+    margin-top: -28px;
+    margin-left: 50px;
     font-weight: bold;
-    padding-left: 65px;
-    font-size: 1.5em;
+    font-size: 2em;
+    border-bottom: 0.5px solid #F2F2F2;
+    color: #262626;
 }
 
-h3.domoAge {
-    float:right;
-    text-align: left;
-    width: 100px;
-    font-weight: bold;
-    padding-right: 40px;
-    font-size: 1.5em;
+#postContent {
+    width: 400px;
+    margin-top: -15px;
+    margin-left: 50px;
+    font-size: 1.2em;
+    color: #262626;
 }
 
-.domo:first-child {
+#postTags {
+    width: 400px;
+    margin-top: -25px;
+    margin-left: 50px;
+    font-size: 1em;
+    font-style: italic;
+    color: #2f2f2f;
+}
+
+.post:first-child {
     margin-top: 10px;
 }
 
-.domo:last-child {
-    margin-bottom:10px;
+.post:last-child {
+    margin-bottom: 10px;
+}
+
+/*** ABOUT SITE ***/
+#info {
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 15px;
+    border-bottom: 0.5px solid #262626;
+}
+
+/*** THEMES ***/
+#themes {
+    width: 600px;
+    height: 400px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 15px;
+    position: relative;
+}
+
+#thm1, #thm2 {
+    width: 50%;
+    margin-left: 45px;
+    border-bottom: 0.5px solid #F2F2F2;
+    font-size: 20px;
+}
+
+#thm3 {
+    width: 50%;
+    margin-left: 45px;
+    font-size: 20px;
+}
+
+.purchase {
+    color: #fff;
+    background-color: #9DA6AF;
+    font-size: 15px;
+    padding: 5px;
+    text-align: center;
+}
+
+/*** ERROR PAGE ***/
+#err {
+    width: 500px;
+    height: 25px;
+    margin: 0 auto;
+    margin-top: 300px;
+    background-color: #fff;
+    padding: 15px;
+    text-align: center;
+    position: relative;
 }

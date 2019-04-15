@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>Project 2 Prototype</title>
+  <title>2AM POSTS</title>
   <script crossorigin src="https://unpkg.com/react@15/dist/react.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
   <script crossorigin src="https://unpkg.com/prop-types/prop-types.min.js"></script>
@@ -14,13 +14,17 @@
 <body>
   <nav><!--<a href="/login"><img id="logo" src="/assets/img/face.png" alt="face logo"/></a>!-->
     <div class="navlink"><a href="/logout">Log out</a></div>
+    <div class="navlink"><a id="changePWButton" href="/changePW">Setting</a></div>
+    <div class="navlink"><a id="themesButton" href="/themes">Themes</a></div>
+    <div class="navlink"><a id="aboutButton" href="/about">About</a></div>
+    <div class="navlink"><a href="/">Home</a></div>
   </nav>
-  <section id="makeDomo">
+  <section id="makePost">
   </section>
-  <section id="domos">
+  <section id="posts">
   </section>
-  <div id="domoMessage"><img id="speech" src="/assets/img/speech.png" alt="speech box"/>
-    <h3><span id="errorMessage"></span></h3><img id="domo" src="assets/img/domo.png" alt="domo"/>
+  <div id="postMessage"><img id="speech" src="/assets/img/speech.png" alt="speech box"/>
+    <h3><span id="errorMessage"></span></h3><img id="post" src="assets/img/domo.png" alt="post"/>
   </div>
   <script src="/assets/bundle.js"></script>
 </body>

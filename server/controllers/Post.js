@@ -1,37 +1,37 @@
 const models = require('../models');
 
-const Domo = models.Domo;
+const Post = models.Post;
 
 const makerPage = (req, res) => {
-  Domo.DomoModel.findByOwner(req.session.account._id, (err, docs) => {
+  Post.PostModel.findByOwner(req.session.account._id, (err, docs) => {
     if (err) {
       console.log(err);
       return res.status(400).json({ error: 'An unexpected error has occured.' });
     }
 
-    return res.render('app', { csrfToken: req.csrfToken(), domos: docs });
+    return res.render('app', { csrfToken: req.csrfToken(), posts: docs });
   });
 };
 
-const makeDomo = (req, res) => {
+const makePost = (req, res) => {
   if (!req.body.title || !req.body.post) {
     return res.status(400).json({ error: 'Title and post content are required.' });
   }
 
-  const domoData = {
+  const postData = {
     title: req.body.title,
     post: req.body.post,
     tag: req.body.tag,
     owner: req.session.account._id,
   };
 
-  const newDomo = new Domo.DomoModel(domoData);
+  const newPost = new Post.PostModel(postData);
 
-  const domoPromise = newDomo.save();
+  const postPromise = newPost.save();
 
-  domoPromise.then(() => res.json({ redirect: '/maker' }));
+  postPromise.then(() => res.json({ redirect: '/maker' }));
 
-  domoPromise.catch((err) => {
+  postPromise.catch((err) => {
     console.log(err);
     if (err.code === 11000) {
       return res.status(400).json({ error: 'Post already exists.' });
@@ -40,46 +40,47 @@ const makeDomo = (req, res) => {
     return res.status(400).json({ error: 'An unexpected error has occured.' });
   });
 
-  return domoPromise;
+  return postPromise;
 };
 
-const deleteDomos = (request, response) => {
+// Delete Posts
+const deletePosts = (request, response) => {
   const req = request;
   const res = response;
 
-console.log("delete");
-    
-  if (!req.body.domoID) {
+  console.log('delete');
+
+  if (!req.body.postID) {
     return res.status(400).json({ error: 'An error occurred' });
   }
 
-  Domo.DomoModel.deleteDomos(req.body.domoID, (err, docs) => {
+  Post.PostModel.deletePosts(req.body.postID, (err, docs) => {
     if (err) {
       console.log(err);
       return res.status(202).json({ error: 'An error occurred' });
     }
 
-    return res.json({ domos: docs });
+    return res.json({ posts: docs });
   });
 
   return false;
 };
 
-const getDomos = (request, response) => {
+const getPosts = (request, response) => {
   const req = request;
   const res = response;
 
-  return Domo.DomoModel.findByOwner(req.session.account._id, (err, docs) => {
+  return Post.PostModel.findByOwner(req.session.account._id, (err, docs) => {
     if (err) {
       console.log(err);
       return res.status(400).json({ error: 'An error occurred' });
     }
 
-    return res.json({ domos: docs });
+    return res.json({ posts: docs });
   });
 };
 
 module.exports.makerPage = makerPage;
-module.exports.getDomos = getDomos;
-module.exports.make = makeDomo;
-module.exports.deleteDomos = deleteDomos;
+module.exports.getPosts = getPosts;
+module.exports.make = makePost;
+module.exports.deletePosts = deletePosts;

@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const _ = require('underscore');
 
-let DomoModel = {};
+let PostModel = {};
 
 // mongoose.Types.ObjectId is a function that
 // converts string ID to a real mongo ID
@@ -11,7 +11,7 @@ let DomoModel = {};
 const convertId = mongoose.Types.ObjectId;
 const setName = (name) => _.escape(name).trim();
 
-const DomoSchema = new mongoose.Schema({
+const PostSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
@@ -43,32 +43,33 @@ const DomoSchema = new mongoose.Schema({
   },
 });
 
-DomoSchema.statics.toAPI = (doc) => ({
+PostSchema.statics.toAPI = (doc) => ({
   title: doc.title,
   post: doc.post,
   tag: doc.tag,
 });
 
-DomoSchema.statics.findByOwner = (ownerId, callback) => {
+PostSchema.statics.findByOwner = (ownerId, callback) => {
   const search = {
     owner: convertId(ownerId),
   };
-  return DomoModel.find(search).select('title post tag').exec(callback);
+  return PostModel.find(search).select('title post tag').exec(callback);
 };
 
-DomoSchema.statics.deleteDomos = (domoID, callback) => {
+// Delete Posts
+PostSchema.statics.deletePosts = (postID, callback) => {
   const search = {
-    _id: convertId(domoID),
+    _id: convertId(postID),
   };
 
-  DomoModel.deleteOne(search, (err) => {
+  PostModel.deleteOne(search, (err) => {
     if (err) throw err;
   }).exec(callback);
-    
-    console.log("successfully deleted");
+
+  console.log('successfully deleted');
 };
 
-DomoModel = mongoose.model('Domo', DomoSchema);
+PostModel = mongoose.model('Post', PostSchema);
 
-module.exports.DomoModel = DomoModel;
-module.exports.DomoSchema = DomoSchema;
+module.exports.PostModel = PostModel;
+module.exports.PostSchema = PostSchema;

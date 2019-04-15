@@ -23,7 +23,7 @@ const login = (request, response) => {
   const password = `${req.body.pass}`;
 
   if (!username || !password) {
-    return res.status(400).json({ error: 'RAWR! All fields are required.' });
+    return res.status(400).json({ error: 'All fields are required.' });
   }
   return Account.AccountModel.authenticate(username, password, (err, account) => {
     if (err || !account) {
@@ -43,7 +43,7 @@ const signup = (request, response) => {
   req.body.pass2 = `${req.body.pass2}`;
 
   if (!req.body.username || !req.body.pass || !req.body.pass2) {
-    return res.status(400).json({ error: 'RAWR! All fields are required' });
+    return res.status(400).json({ error: 'All fields are required' });
   }
 
   if (req.body.pass !== req.body.pass2) {
@@ -67,11 +67,63 @@ const signup = (request, response) => {
     savePromise.catch((err) => {
       console.log(err);
       if (err.code === 11000) {
-        return res.status(400).json({ error: 'Username already in use.' });
+        return res.status(400).json({ error: 'Username already in use' });
       }
-      return res.status(400).json({ error: 'An unexpected error occurred.' });
+      return res.status(400).json({ error: 'An unexpected error occurred' });
     });
   });
+};
+
+// Password Change
+const changePW = (request, response) => {
+  const req = request;
+  const res = response;
+
+  req.body.oldPass = `${req.body.oldPass}`;
+  req.body.pass = `${req.body.pass}`;
+  req.body.pass2 = `${req.body.pass2}`;
+
+  if (!req.body.oldPass || !req.body.pass || !req.body.pass2) {
+    return res.status(400).json({ error: 'All fields are required' });
+  }
+    
+  if (req.body.pass !== req.body.pass2) {
+    return res.status(400).json({ error: 'Passwords do not match' });
+  }
+    
+  return Account.AccountModel.authenticate(req.session.account.username, req.body.oldPass,
+    (err, account) => {
+      if (err || !account) {
+        return res.status(401).json({ error: 'Password Incorrect' });
+      }
+        
+      return Account.AccountModel.generateHash(req.body.pass, (salt, hash) => Account.AccountModel.findByUsername(req.session.account.username,
+          (err2, acc) => {
+              if (err2) {
+                console.log(err2);
+                return res.status(400).json({ error: 'An unexpected error occurred' });
+              }
+              
+              // Update the account with new password
+              const updatedAcc = acc;
+              
+              updatedAcc.salt = salt;
+              updatedAcc.password = hash;
+
+              const savePromise = updatedAcc.save();
+
+              savePromise.then(() => 
+                res.json({ redirect: '/maker' })
+              );
+
+              savePromise.catch((err3) => {
+                  console.log(err3);
+                  return res.status(400).json({ error: 'An unexpected error occurred' });
+              });
+              
+              return savePromise;
+        }));
+    });
 };
 
 const getToken = (request, response) => {
@@ -90,4 +142,5 @@ module.exports.login = login;
 module.exports.logout = logout;
 module.exports.signupPage = signupPage;
 module.exports.signup = signup;
+module.exports.changePW = changePW;
 module.exports.getToken = getToken;
