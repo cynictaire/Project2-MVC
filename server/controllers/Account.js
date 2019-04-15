@@ -98,7 +98,8 @@ const changePW = (request, response) => {
       }
         
       return Account.AccountModel.generateHash(req.body.pass, 
-          (salt, hash) => Account.AccountModel.findByUsername
+          (salt, hash) => 
+          Account.AccountModel.findByUsername
           (req.session.account.username, (err2, acc) => {
               if (err2) {
                 console.log(err2);
